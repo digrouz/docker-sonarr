@@ -1,45 +1,41 @@
-# docker-jackett
-Installs Jackett into a Linux Container
+# docker-sonarr
+Installs Sonarr into a Linux Container
 
 
-![jackett](https://github.com/Jackett/Jackett/blob/master/src/Jackett/Content/jacket_medium.png)
+![Sonarr](https://github.com/Sonarr/Sonarr/blob/phantom-develop/Logo/128.png)
 
 ## Tag
 Several tag are available:
-* latest: see centos7
-* centos7: [centos7/Dokerfile](https://github.com/digrouz/docker-jackett/blob/master/Dockerfile-centos7)
-* alpine3.8: [alpine3.8/Dockerfile](https://github.com/digrouz/docker-jackett/blob/master/Dockerfile-alpine3.8)
+* latest: see alpine
+* alpine: [Dockerfile_alpine](https://github.com/digrouz/docker-sonarr/blob/master/Dockerfile_alpine)
 
 ## Description
 
-Jackett works as a proxy server: it translates queries from apps (Sonarr, SickRage, CouchPotato, Mylar, etc) into tracker-site-specific http queries, parses the html response, then sends results back to the requesting software. This allows for getting recent uploads (like RSS) and performing searches. Jackett is a single repository of maintained indexer scraping & translation logic - removing the burden from other apps.
+Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
 
-Developer note: The software implements the Torznab (with nZEDb category numbering) and TorrentPotato APIs.
-
-https://github.com/Jackett/Jackett
+https://sonarr.tv
 
 ## Usage
-    docker create --name=jackett \
+    docker create --name=sonarr \
       -v /etc/localtime:/etc/localtime:ro \
       -v <path to config>:/config \
-      -v <path to downloads>:/downloads \
-      -e DOCKUID=<UID default:10008> \
-      -e DOCKGID=<GID default:10008> \
+      -e DOCKUID=<UID default:10031> \
+      -e DOCKGID=<GID default:10031> \
       -e DOCKUPGRADE=<0|1> \
-      -p 9117:9117 \
-      digrouz/jackett
+      -p 8989:8989 \
+      digrouz/sonarr
 
 ## Environment Variables
 
-When you start the `jackett` image, you can adjust the configuration of the `jackett` instance by passing one or more environment variables on the `docker run` command line.
+When you start the `sonarr` image, you can adjust the configuration of the `sonarr` instance by passing one or more environment variables on the `docker run` command line.
 
 ### `DOCKUID`
 
-This variable is not mandatory and specifies the user id that will be set to run the application. It has default value `10008`.
+This variable is not mandatory and specifies the user id that will be set to run the application. It has default value `10031`.
 
 ### `DOCKGID`
 
-This variable is not mandatory and specifies the group id that will be set to run the application. It has default value `10008`.
+This variable is not mandatory and specifies the group id that will be set to run the application. It has default value `10031`.
 
 ### `DOCKUPGRADE`
 
@@ -51,4 +47,4 @@ This variable is not mandatory and specifies if the container has to launch soft
 
 ## Issues
 
-If you encounter an issue please open a ticket at [github](https://github.com/digrouz/docker-jackett/issues)
+If you encounter an issue please open a ticket at [github](https://github.com/digrouz/docker-sonarr/issues)
