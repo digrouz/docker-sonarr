@@ -1,41 +1,41 @@
-# docker-sonarr
-Installs Sonarr into a Linux Container
+# docker-radarr
+Installs Radarr into a Linux Container
 
 
-![Sonarr](https://github.com/Sonarr/Sonarr/blob/phantom-develop/Logo/128.png)
+![Radarr](https://raw.githubusercontent.com/Radarr/Radarr/aphrodite/Logo/128.png)
 
 ## Tag
 Several tag are available:
 * latest: see alpine
-* alpine: [Dockerfile_alpine](https://github.com/digrouz/docker-sonarr/blob/master/Dockerfile_alpine)
+* alpine: [Dockerfile_alpine](https://github.com/digrouz/docker-radarr/blob/master/Dockerfile_alpine)
 
 ## Description
 
-Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
+Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent. The project was inspired by other Usenet/BitTorrent movie downloaders such as CouchPotato.
 
-https://sonarr.tv
+https://radarr.videos
 
 ## Usage
-    docker create --name=sonarr \
+    docker create --name=radarr \
       -v /etc/localtime:/etc/localtime:ro \
       -v <path to config>:/config \
-      -e DOCKUID=<UID default:10031> \
-      -e DOCKGID=<GID default:10031> \
+      -e DOCKUID=<UID default:10032> \
+      -e DOCKGID=<GID default:10032> \
       -e DOCKUPGRADE=<0|1> \
-      -p 8989:8989 \
-      digrouz/sonarr
+      -p 7878:7878 \
+      digrouz/radarr
 
 ## Environment Variables
 
-When you start the `sonarr` image, you can adjust the configuration of the `sonarr` instance by passing one or more environment variables on the `docker run` command line.
+When you start the `radarr` image, you can adjust the configuration of the `radarr` instance by passing one or more environment variables on the `docker run` command line.
 
 ### `DOCKUID`
 
-This variable is not mandatory and specifies the user id that will be set to run the application. It has default value `10031`.
+This variable is not mandatory and specifies the user id that will be set to run the application. It has default value `10032`.
 
 ### `DOCKGID`
 
-This variable is not mandatory and specifies the group id that will be set to run the application. It has default value `10031`.
+This variable is not mandatory and specifies the group id that will be set to run the application. It has default value `10032`.
 
 ### `DOCKUPGRADE`
 
@@ -47,4 +47,4 @@ This variable is not mandatory and specifies if the container has to launch soft
 
 ## Issues
 
-If you encounter an issue please open a ticket at [github](https://github.com/digrouz/docker-sonarr/issues)
+If you encounter an issue please open a ticket at [github](https://github.com/digrouz/docker-radarr/issues)
