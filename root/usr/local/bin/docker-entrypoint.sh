@@ -10,7 +10,7 @@ MYGID="${APPGID}"
 ConfigureUser
 AutoUpgrade
 
-if [ "$1" = 'sonarr' ]; then
+if [ "$1" = 'radarr' ]; then
   if [ -d  /config ]; then
     chown -R "${MYUSER}":"${MYUSER}" /config
   fi
@@ -18,7 +18,7 @@ if [ "$1" = 'sonarr' ]; then
   RunDropletEntrypoint
   
   DockLog "Starting app: ${@}"
-  exec su-exec "${MYUSER}" mono --debug /opt/Sonarr/Sonarr.exe -no-browser -data=/config
+  exec su-exec "${MYUSER}" mono --debug /opt/Radarr/Radarr.exe -no-browser -data=/config
 else
   DockLog "Starting command: ${@}"
   exec "$@"

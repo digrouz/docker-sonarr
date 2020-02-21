@@ -1,14 +1,17 @@
 FROM alpine:3.11
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
+ARG RADARR_VERSION="0.2.0.1480"
+
 ### Environment variables
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US.UTF-8' \
     TERM='xterm' \
-    APPUSER='sonarr' \
-    APPUID='10031' \
-    APPGID='10031' \
-    XDG_CONFIG_HOME='/config/xdg'
+    APPUSER='radarr' \
+    APPUID='10033' \
+    APPGID='10033' \
+    XDG_CONFIG_HOME='/config/xdg' \
+    RADARR_VERSION="${RADARR_VERSION}"
     
 ### Copy config files
 COPY root/ /
@@ -25,6 +28,7 @@ RUN set -x && \
     apk add --no-cache --virtual=build-deps \
       ca-certificates \
       curl \
+      jq \
     && \
     apk add --no-cache --virtual=run-deps \
       bash \
@@ -39,10 +43,10 @@ RUN set -x && \
     mozroots --import --sync && \
     cert-sync /etc/ssl/certs/ca-certificates.crt && \
     ln -s /usr/lib/libmono-native.so.0 /usr/lib/libmono-native.so && \
-    curl -SsL "https://services.sonarr.tv/v1/download/phantom-develop/latest?version=3&os=linux" -o /tmp/sonarr.tar.gz && \
-    tar xzf /tmp/sonarr.tar.gz -C /opt && \
+    curl -SsL https://github.com/Radarr/Radarr/releases/download/v${RADARR_VERSION}/Radarr.develop.${RADARR_VERSION}.linux.tar.gz -o /tmp/radarr.tar.gz && \
+    tar xzf /tmp/radarr.tar.gz -C /opt && \
     echo "export XDG_CONFIG_HOME='${XDG_CONFIG_HOME}'" >> /etc/profile.d/docker-xdg.sh && \
-    chmod 0755 /opt/Sonarr && \
+    chmod 0755 /opt/Radarr && \
     apk del --no-cache --purge \
       build-deps  \
     && \
@@ -57,11 +61,11 @@ RUN set -x && \
 Volume ["/config"]
 
 ### Expose ports
-Expose 8989
+Expose 7878
 
 ### Running User: not used, managed by docker-entrypoint.sh
-#USER sonarr
+#USER radarr
 
-### Start sonarr
+### Start radarr
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["sonarr"]
+CMD ["radarr"]
