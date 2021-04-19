@@ -37,7 +37,6 @@ RUN set -x && \
       mono \
     && \
     cert-sync /etc/ssl/certs/ca-certificates.crt && \
-    ln -s /usr/lib/libmono-native.so.0 /usr/lib/libmono-native.so && \
     curl -SsL "https://services.sonarr.tv/v1/download/phantom-develop/latest?version=3&os=linux" -o /tmp/sonarr.tar.gz && \
     tar xzf /tmp/sonarr.tar.gz -C /opt && \
     echo "export XDG_CONFIG_HOME='${XDG_CONFIG_HOME}'" >> /etc/profile.d/docker-xdg.sh && \

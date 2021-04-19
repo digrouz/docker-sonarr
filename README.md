@@ -1,3 +1,7 @@
+[![auto-update-workflow](https://github.com/digrouz/docker-sonarr/actions/workflows/auto-update.yml/badge.svg)](https://github.com/digrouz/docker-sonarr/actions/workflows/auto-update.yml)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/digrouz/sonarr)
+![Docker Pulls](https://img.shields.io/docker/pulls/digrouz/sonarr)
+
 # docker-sonarr
 Installs Sonarr into a Linux Container
 
