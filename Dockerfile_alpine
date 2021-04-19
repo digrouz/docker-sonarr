@@ -1,6 +1,8 @@
 FROM alpine:3.13
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
+ARG SONARR_VERSION='3.0.5.1144'
+
 ### Environment variables
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US.UTF-8' \
@@ -8,7 +10,8 @@ ENV LANG='en_US.UTF-8' \
     APPUSER='sonarr' \
     APPUID='10031' \
     APPGID='10031' \
-    XDG_CONFIG_HOME='/config/xdg'
+    XDG_CONFIG_HOME='/config/xdg' \
+    SONARR_VERSION="${SONARR_VERSION}"
     
 ### Copy config files
 COPY root/ /
