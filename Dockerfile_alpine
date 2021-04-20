@@ -1,8 +1,8 @@
 FROM alpine:3.13
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
-ARG SONARR_VERSION='3.0.6.1196' \
-    SONARR_BRANCH='main'
+ARG SONARR_VERSION='3.0.6.1196'
+ARG SONARR_BRANCH='main'
 
 ### Environment variables
 ENV LANG='en_US.UTF-8' \
