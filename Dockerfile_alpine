@@ -46,7 +46,7 @@ RUN set -x && \
     tar xzf /tmp/sonarr.tar.gz -C /opt && \
     echo "export XDG_CONFIG_HOME='${XDG_CONFIG_HOME}'" >> /etc/profile.d/docker-xdg.sh && \
     echo "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\nPackageVersion=${SONARR_VERSION}\nPackageAuthor=[digrouz](https://github.com/digrouz)" > /opt/Sonarr/package_info && \
-    rm -rf /app/sonarr/bin/Sonarr.Update && \
+    rm -rf /opt/Sonarr/Sonarr.Update && \
     chmod 0755 /opt/Sonarr && \
     apk del --no-cache --purge \
       build-deps  \
