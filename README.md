@@ -5,7 +5,6 @@
 # docker-sonarr
 Installs Sonarr into a Linux Container
 
-
 ![Sonarr](https://github.com/Sonarr/Sonarr/blob/phantom-develop/Logo/128.png)
 
 ## Tag
