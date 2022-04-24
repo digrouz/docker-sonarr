@@ -1,7 +1,7 @@
 FROM alpine:3.15.4
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
-ARG SONARR_VERSION='3.0.7.1477'
+ARG SONARR_VERSION='3.0.8.1507'
 ARG SONARR_BRANCH='main'
 
 ### Environment variables
