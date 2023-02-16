@@ -1,4 +1,4 @@
-FROM alpine:3.17.2
+FROM digrouz/alpine-s6:latest
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
 ARG SONARR_VERSION='3.0.9.1549'
@@ -8,9 +8,6 @@ ARG SONARR_BRANCH='main'
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US.UTF-8' \
     TERM='xterm' \
-    APPUSER='sonarr' \
-    APPUID='10031' \
-    APPGID='10031' \
     XDG_CONFIG_HOME='/config/xdg' \
     SONARR_VERSION="${SONARR_VERSION}" \
     SONARR_BRANCH="${SONARR_BRANCH}"
@@ -32,9 +29,7 @@ RUN set -x && \
       curl \
     && \
     apk add --no-cache --virtual=run-deps \
-      bash \
       mediainfo \
-      su-exec \
       unzip \
     && \
     apk add --no-cache --repository http://nl.alpinelinux.org/alpine/edge/testing --virtual=run-deps-testing \
@@ -48,9 +43,6 @@ RUN set -x && \
     apk del --no-cache --purge \
       build-deps  \
     && \
-    mkdir /docker-entrypoint.d && \
-    chmod +x /usr/local/bin/docker-entrypoint.sh && \
-    ln -snf /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh && \
     rm -rf /tmp/* \
            /var/cache/apk/*  \
            /var/tmp/*
@@ -60,10 +52,3 @@ Volume ["/config"]
 
 ### Expose ports
 Expose 8989
-
-### Running User: not used, managed by docker-entrypoint.sh
-#USER sonarr
-
-### Start sonarr
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["sonarr"]
