@@ -5,7 +5,9 @@ SONARR_URL="https://api.github.com/repos/Sonarr/Sonarr/tags"
 FULL_LAST_VERSION=$(curl -SsL ${SONARR_URL} | jq .[0].name -r )
 LAST_VERSION="${FULL_LAST_VERSION:1}"
 
-sed -i -e "s|SONARR_VERSION='.*'|SONARR_VERSION='${LAST_VERSION}'|" Dockerfile*
+if [ -z "${LAST_VERSION}" ]; then
+  sed -i -e "s|SONARR_VERSION='.*'|SONARR_VERSION='${LAST_VERSION}'|" Dockerfile*
+fi
 
 if output=$(git status --porcelain) && [ -z "$output" ]; then
   # Working directory clean
