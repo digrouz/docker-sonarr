@@ -5,7 +5,7 @@ SONARR_URL="https://api.github.com/repos/Sonarr/Sonarr/tags"
 FULL_LAST_VERSION=$(curl -SsL ${SONARR_URL} | jq .[0].name -r )
 LAST_VERSION="${FULL_LAST_VERSION:1}"
 
-if [ -z "${LAST_VERSION}" ]; then
+if [ ${LAST_VERSION}" ]; then
   sed -i -e "s|SONARR_VERSION='.*'|SONARR_VERSION='${LAST_VERSION}'|" Dockerfile*
 fi
 
