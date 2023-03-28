@@ -2,7 +2,7 @@
 SONARR_URL="https://download.sonarr.tv/v3/main/"
 
 FULL_LAST_VERSION=$(curl -SsL ${SONARR_URL} | grep -Po '<a href="\K([\d.]+)' | grep -v "\.\." | sort -n | tail -1)
-LAST_VERSION="${FULL_LAST_VERSION:1}"
+LAST_VERSION="${FULL_LAST_VERSION}"
 
 if [ "${LAST_VERSION}" ]; then
   sed -i -e "s|SONARR_VERSION='.*'|SONARR_VERSION='${LAST_VERSION}'|" Dockerfile*
