@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
+SONARR_URL="https://download.sonarr.tv/v3/main/"
 
-SONARR_URL="https://api.github.com/repos/Sonarr/Sonarr/tags"
-
-FULL_LAST_VERSION=$(curl -SsL ${SONARR_URL} | jq .[0].name -r )
+FULL_LAST_VERSION=$(curl -SsL ${SONARR_URL} | grep -Po '<a href="\K([\d.]+)' | grep -v "\.\." | sort -n | tail -1)
 LAST_VERSION="${FULL_LAST_VERSION:1}"
 
 if [ "${LAST_VERSION}" ]; then
