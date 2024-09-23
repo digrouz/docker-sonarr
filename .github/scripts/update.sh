@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -x
 SONARR_URL="https://services.sonarr.tv/v1/releases"
+SONARR_CHANNEL="v4-stable"
 
 FULL_LAST_VERSION=$(curl -SsL ${SONARR_URL} | jq -r "first(.[] | select(.releaseChannel==\"${SONARR_CHANNEL}\") | .version)")
 LAST_VERSION="${FULL_LAST_VERSION}"
