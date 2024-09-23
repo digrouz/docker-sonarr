@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-SONARR_URL="https://download.sonarr.tv/v3/main/"
+SONARR_URL="https://download.sonarr.tv/v4/main/"
 
 FULL_LAST_VERSION=$(curl -SsL ${SONARR_URL} | grep -Po '<a href="\K([\d.]+)' | grep -v "\.\." |  sort -t . -k 4 | tail -1)
 LAST_VERSION="${FULL_LAST_VERSION}"
