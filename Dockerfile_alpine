@@ -31,7 +31,7 @@ RUN set -x && \
       unzip \
       xmlstarlet \
     && \
-    curl -SsL "https://download.sonarr.tv/v4/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux-musl-${SONARR_ARCH}.tar.gz" -o /tmp/sonarr.tar.gz && \
+    curl -SsL "https://github.com/Sonarr/Sonarr/releases/download/v${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux-musl-${SONARR_ARCH}.tar.gz" -o /tmp/sonarr.tar.gz && \
     tar xzf /tmp/sonarr.tar.gz -C /opt && \
     echo "export XDG_CONFIG_HOME='${XDG_CONFIG_HOME}'" >> /etc/profile.d/docker-xdg.sh && \
     chmod 0755 /opt/Sonarr && \
