@@ -3,6 +3,7 @@ LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
 ARG SONARR_VERSION='4.0.0.748'
 ARG SONARR_BRANCH='main'
+ARG SONARR_ARCH='x64'
 
 ### Environment variables
 ENV LANG='en_US.UTF-8' \
@@ -10,7 +11,8 @@ ENV LANG='en_US.UTF-8' \
     TERM='xterm' \
     XDG_CONFIG_HOME='/config/xdg' \
     SONARR_VERSION="${SONARR_VERSION}" \
-    SONARR_BRANCH="${SONARR_BRANCH}"
+    SONARR_BRANCH="${SONARR_BRANCH}" \
+    SONARR_ARCH="${SONARR_ARCH}"
     
 ### Copy config files
 COPY root/ /
@@ -30,7 +32,7 @@ RUN set -x && \
       mono \
     && \
     cert-sync /etc/ssl/certs/ca-certificates.crt && \
-    curl -SsL "https://download.sonarr.tv/v4/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux.tar.gz" -o /tmp/sonarr.tar.gz && \
+    curl -SsL "https://download.sonarr.tv/v4/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux-musl-${SONARR_ARCH}.tar.gz" -o /tmp/sonarr.tar.gz && \
     tar xzf /tmp/sonarr.tar.gz -C /opt && \
     echo "export XDG_CONFIG_HOME='${XDG_CONFIG_HOME}'" >> /etc/profile.d/docker-xdg.sh && \
     chmod 0755 /opt/Sonarr && \
