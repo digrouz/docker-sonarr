@@ -1,7 +1,7 @@
 FROM digrouz/alpine-s6:latest
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
-ARG SONARR_VERSION='4.0.14.2939'
+ARG SONARR_VERSION='4.0.15.2941'
 ARG SONARR_BRANCH='main'
 ARG SONARR_ARCH='x64'
 
