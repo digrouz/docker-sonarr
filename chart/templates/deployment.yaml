@@ -27,7 +27,7 @@ spec:
               name: sonarr-config
             - mountPath: /downloads
               name: sonarr-downloads
-            - mountPath: /tvshows
+            - mountPath: /tv
               name: sonarr-tvshows
 {{- if .Values.persistence.extraVolumeMounts }}
 {{- toYaml .Values.persistence.extraVolumeMounts | nindent 12 }}
