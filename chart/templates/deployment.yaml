@@ -1,0 +1,80 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-sonarr
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: sonarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: sonarr
+    spec:
+      containers:
+        - name: sonarr
+          image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8989
+          volumeMounts:
+            - mountPath: /config
+              name: sonarr-config
+            - mountPath: /downloads
+              name: sonarr-downloads
+            - mountPath: /tvshows
+              name: sonarr-tvshows
+{{- if .Values.extraVolumeMounts }}
+{{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+{{- end }}
+          env:
+            - name: GID
+              value: "{{ .Values.service.gid }}"
+            - name: UID
+              value: "{{ .Values.service.uid }}"
+            - name: TZ
+              value: "{{ .Values.service.tz }}"
+            - name: AUTOUPGRADE
+              value: "{{ .Values.service.autoupgrade }}"
+      volumes:
+        - name: sonarr-config
+          {{- if eq .Values.persistence.config.type "pvc" }}
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-config-pvc
+          {{- else if eq .Values.persistence.config.type "nfs" }}
+          nfs:
+            server: {{ .Values.persistence.config.nfs.server }}
+            path: {{ .Values.persistence.config.nfs.path }}
+          {{- else }}
+          emptyDir: { }
+          {{- end }}
+        - name: sonarr-downloads
+          {{- if eq .Values.persistence.downloads.type "pvc" }}
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads-pvc
+          {{- else if eq .Values.persistence.downloads.type "nfs" }}
+          nfs:
+            server: {{ .Values.persistence.downloads.nfs.server }}
+            path: {{ .Values.persistence.downloads.nfs.path }}
+          {{- else }}
+          emptyDir: { }
+          {{- end }}
+        - name: sonarr-tvshows
+          {{- if eq .Values.persistence.tvshows.type "pvc" }}
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-tvshows-pvc
+          {{- else if eq .Values.persistence.tvshows.type "nfs" }}
+          nfs:
+            server: {{ .Values.persistence.tvshows.nfs.server }}
+            path: {{ .Values.persistence.tvshows.nfs.path }}
+          {{- else }}
+          emptyDir: { }
+          {{- end }}
+{{- if .Values.extraVolumes }}
+{{- toYaml .Values.extraVolumes | nindent 8 }}
+{{- end }}
