@@ -29,8 +29,8 @@ spec:
               name: sonarr-downloads
             - mountPath: /tvshows
               name: sonarr-tvshows
-{{- if .Values.extraVolumeMounts }}
-{{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+{{- if .Values.persistence.extraVolumeMounts }}
+{{- toYaml .Values.persistence.extraVolumeMounts | nindent 12 }}
 {{- end }}
           env:
             - name: GID
@@ -75,6 +75,6 @@ spec:
           {{- else }}
           emptyDir: { }
           {{- end }}
-{{- if .Values.extraVolumes }}
-{{- toYaml .Values.extraVolumes | nindent 8 }}
+{{- if .Values.persistence.extraVolumes }}
+{{- toYaml .Values.persistence.extraVolumes | nindent 8 }}
 {{- end }}
