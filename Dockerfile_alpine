@@ -1,5 +1,5 @@
 FROM digrouz/alpine-s6:latest
-LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
+LABEL maintainer="DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
 ARG SONARR_VERSION='4.0.20.3014'
 ARG SONARR_BRANCH='main'
